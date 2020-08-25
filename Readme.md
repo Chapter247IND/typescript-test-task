@@ -39,6 +39,12 @@ then start the project
 npm run dev
 ```
 
+create build
+
+```
+npm run build
+```
+
 ## Running test
 
 Make sure the api is running.
