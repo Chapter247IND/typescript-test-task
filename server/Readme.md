@@ -47,7 +47,7 @@ npm run build
 
 ## Running test
 
-Make sure the api is running.
+Make sure the api is running with `npm run dev`.
 
 ```
 npm run test
