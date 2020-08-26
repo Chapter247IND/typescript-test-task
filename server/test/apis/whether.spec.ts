@@ -16,3 +16,9 @@ describe("Test /:cityname rotue", () => {
     expect(status).toBe(500);
   });
 });
+describe("Test /history rotue", () => {
+  it("Should success with indore as cityname", async () => {
+    const { status } = await Axios.get(`${API_ENDPOINT}/history`);
+    expect(status).toBe(200);
+  });
+});

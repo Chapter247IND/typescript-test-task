@@ -1,0 +1,54 @@
+@import "./variables";
+@import "./mixin";
+
+body {
+  .container {
+    width: 90%;
+    margin: auto;
+    .main-box {
+      width: 50%;
+      margin: auto;
+      border: 1px solid $defaultBorderColor;
+      padding: 20px;
+      .search-box {
+        @include Box();
+        @include InputField();
+        .search-button {
+          background: $black;
+          margin: 10px 0;
+          padding: 10px;
+          width: 100px;
+          color: $white;
+          font-size: 16px;
+          border: 1px solid $black;
+          border-radius: 5px;
+          border: none;
+          cursor: pointer;
+        }
+      }
+      .history-box {
+        .history-table {
+          width: 100%;
+          td,
+          th {
+            border: 1px solid $defaultBorderColor;
+          }
+          td {
+            text-align: center;
+            padding: 5px;
+            @include ErrorBox();
+            p {
+              font-size: 16px;
+              span {
+                font-weight: 600;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .text-left {
+    text-align: left !important;
+  }
+}

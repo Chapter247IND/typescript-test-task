@@ -1,0 +1,30 @@
+@mixin Box() {
+  width: 80%;
+  margin: 20px auto;
+}
+
+@mixin InputField {
+  .input-box {
+    & > .input-field {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $defaultBorderColor;
+      border-radius: 5px;
+      font-size: 14px;
+      &:focus,
+      &:active {
+        border: 1px solid $defaultBorderColor;
+      }
+    }
+  }
+}
+
+@mixin ErrorBox {
+  .error-message {
+    color: $dangerColor;
+    background: $dangerBackground;
+    padding: 15px;
+    border-radius: 5px;
+    font-weight: bold;
+  }
+}

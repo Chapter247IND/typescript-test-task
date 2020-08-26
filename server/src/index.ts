@@ -7,6 +7,7 @@ import "reflect-metadata";
 import { WhetherRoutes } from "./routes";
 import fastifyStatic from "fastify-static";
 import path from "path";
+import fastifyCORS from "fastify-cors";
 // initialize .env
 dotenv.config();
 
@@ -14,11 +15,14 @@ const server: FastifyInstance<
   Server,
   IncomingMessage,
   ServerResponse
-> = fastify({ logger: true });
+> = fastify({ logger: process.env.NODE_ENV === "development" });
+
 // register static contents
 server.register(fastifyStatic, {
   root: path.join(__dirname, "..", "public"),
 });
+// accept cross-origin request
+server.register(fastifyCORS, {});
 // register routes logger
 server.register(fastifyBlipp);
 // register routes
