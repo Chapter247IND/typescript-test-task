@@ -4,10 +4,13 @@ import fastifyBlipp from "fastify-blipp";
 import { IncomingMessage, Server, ServerResponse } from "http";
 import "module-alias/register";
 import "reflect-metadata";
-import { WhetherRoutes } from "./routes";
+import { WhetherRoutes, UserRoutes, FlightRoutes } from "./routes";
 import fastifyStatic from "fastify-static";
 import path from "path";
 import fastifyCORS from "fastify-cors";
+import socket from "socket.io";
+import { LiveFlightController } from "./controllers/socket";
+
 // initialize .env
 dotenv.config();
 
@@ -16,7 +19,15 @@ const server: FastifyInstance<
   IncomingMessage,
   ServerResponse
 > = fastify({ logger: process.env.NODE_ENV === "development" });
+const io = socket(server.server);
 
+io.on("connection", (client) => {
+  client.on("statusUpdated", async (id: number, status: string) => {
+    const updatedFlight = await LiveFlightController.statusUpdated(id, status);
+    client.emit("statusUpdated", updatedFlight);
+    client.broadcast.emit("statusUpdated", updatedFlight);
+  });
+});
 // register static contents
 server.register(fastifyStatic, {
   root: path.join(__dirname, "..", "public"),
@@ -26,6 +37,8 @@ server.register(fastifyCORS, {});
 // register routes logger
 server.register(fastifyBlipp);
 // register routes
+server.register(FlightRoutes, { prefix: "/flights" });
+server.register(UserRoutes, { prefix: "/users" });
 server.register(WhetherRoutes);
 /**
  * Handle all uncaugth exceptions

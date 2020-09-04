@@ -6,27 +6,25 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity({ name: "whether_history" })
-class WhetherHistory {
+@Entity({ name: "users" })
+class User {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
     length: 150,
   })
-  city: string;
+  display_name: string;
 
   @Column({
     length: 150,
-    nullable: true,
   })
-  country: string;
+  username: string;
 
   @Column({
-    nullable: true,
-    type: "longtext",
+    type: "text",
   })
-  details: string;
+  password: string;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -34,4 +32,5 @@ class WhetherHistory {
   @UpdateDateColumn()
   updatedAt: Date;
 }
-export default WhetherHistory;
+
+export default User;

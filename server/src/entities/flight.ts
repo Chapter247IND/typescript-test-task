@@ -6,27 +6,26 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
-@Entity({ name: "whether_history" })
-class WhetherHistory {
+@Entity({ name: "flights" })
+class Flight {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
-    length: 150,
+    type: "varchar",
   })
-  city: string;
+  name: string;
 
   @Column({
-    length: 150,
-    nullable: true,
+    type: "enum",
+    enum: ["SCHEDULED", "IN-FLIGHT", "CANCELLED"],
   })
-  country: string;
+  status: string;
 
   @Column({
-    nullable: true,
-    type: "longtext",
+    type: "datetime",
   })
-  details: string;
+  scheduledAt: Date;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -34,4 +33,4 @@ class WhetherHistory {
   @UpdateDateColumn()
   updatedAt: Date;
 }
-export default WhetherHistory;
+export default Flight;
