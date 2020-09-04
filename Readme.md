@@ -8,7 +8,7 @@ Created with ReactJS and TypeScript. Dependencies are installed with `yarn`.
 
 Created with NodeJS, Fastify, TypeORM, SocketIO with MySQL Databse. Dependencies are installed using `npm`
 
-### Instructions to start the application in placed inside their own repo.
+### Instructions to start the application are placed inside their own repo.
 
 ## Demo Video:
 
