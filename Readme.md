@@ -13,3 +13,10 @@ Created with NodeJS, Fastify, TypeORM, SocketIO with MySQL Databse. Dependencies
 ## Demo Video:
 
 [See this Loom](https://www.loom.com/share/4126a4af17fb401582501b1923438c35)
+
+## Login Details:
+
+```
+Username: testuser123
+Password: 123456
+```
