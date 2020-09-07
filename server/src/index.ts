@@ -2,7 +2,6 @@ import dotenv from "dotenv";
 import fastify, { FastifyInstance } from "fastify";
 import fastifyBlipp from "fastify-blipp";
 import { IncomingMessage, Server, ServerResponse } from "http";
-import "module-alias/register";
 import "reflect-metadata";
 import { WhetherRoutes, UserRoutes, FlightRoutes } from "./routes";
 import fastifyStatic from "fastify-static";

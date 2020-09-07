@@ -14,7 +14,12 @@
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [
+      {
+        "transform": "@zerollup/ts-transform-paths"
+      }
+    ]
   },
   "include": ["./src/**/*.ts"],
   "exclude": ["node_modules"]
