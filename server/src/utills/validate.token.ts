@@ -51,5 +51,4 @@ export const validateEndpoint = (
       next();
     }
   );
-  next();
 };
