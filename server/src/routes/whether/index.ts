@@ -8,6 +8,7 @@ export default fp(async (server, opts, next) => {
     method: ["GET", "HEAD"],
     handler: WhetherController.getWhetherHistory,
   });
+
   server.route({
     url: "/:cityname",
     logLevel: "warn",

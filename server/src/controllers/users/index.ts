@@ -28,7 +28,7 @@ const login = async (req: FastifyRequest, res: FastifyReply) => {
         id: user.id,
         username: user.username,
       },
-      "ABCdefghijklmnopqrstuwxyz123123131231344554678!@#$%^&*()(",
+      process.env.JWT_SECRET,
       {
         expiresIn: "1d",
       }

@@ -8,7 +8,9 @@ import fastifyStatic from "fastify-static";
 import path from "path";
 import fastifyCORS from "fastify-cors";
 import socket from "socket.io";
-import { LiveFlightController } from "./controllers/socket";
+import { LiveFlightController } from "@server/controllers/socket";
+
+import { validateSocketConnection } from "@server/utills/validate.token";
 
 // initialize .env
 dotenv.config();
@@ -20,7 +22,7 @@ const server: FastifyInstance<
 > = fastify({ logger: process.env.NODE_ENV === "development" });
 const io = socket(server.server);
 
-io.on("connection", (client) => {
+io.use(validateSocketConnection).on("connection", (client) => {
   client.on("statusUpdated", async (id: number, status: string) => {
     const updatedFlight = await LiveFlightController.statusUpdated(id, status);
     client.emit("statusUpdated", updatedFlight);
@@ -36,7 +38,9 @@ server.register(fastifyCORS, {});
 // register routes logger
 server.register(fastifyBlipp);
 // register routes
-server.register(FlightRoutes, { prefix: "/flights" });
+server.register(FlightRoutes, {
+  prefix: "/flights",
+});
 server.register(UserRoutes, { prefix: "/users" });
 server.register(WhetherRoutes);
 /**

@@ -29,7 +29,11 @@ const FlightsList = () => {
     }
   };
   const initializeSocket = () => {
-    socket = io(`${process.env.REACT_APP_API_ENDPOINT}`);
+    socket = io(`${process.env.REACT_APP_API_ENDPOINT}`, {
+      query: {
+        token: cookies.token,
+      },
+    });
     socket.on("statusUpdated", (newFlighDetails: any) => {
       const data = flightRef.current;
       const index = data.findIndex((d: any) => d.id === newFlighDetails.id);
