@@ -1,18 +1,16 @@
-import React from "react";
-import { useCookies } from "react-cookie";
-import { useHistory } from "react-router";
-import { PageHeader, Button, Row, Col } from "antd";
+import { Button, Col, PageHeader, Row } from "antd";
 import FlightsList from "Components/Flights";
+import React from "react";
+import { useHistory } from "react-router";
 
 const FlightPage = () => {
-  // eslint-disable-next-line
-  const [cookies, _, removeCookie] = useCookies(["cookie-name"]);
   const history = useHistory();
-  if (!cookies.token) {
+  if (!localStorage.token) {
     history.push("/");
   }
   const logOut = () => {
-    removeCookie("token");
+    localStorage.removeItem("token");
+    localStorage.removeItem("expires");
     history.push("/");
   };
   return (

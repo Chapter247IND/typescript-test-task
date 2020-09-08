@@ -20,7 +20,7 @@ export const validateSocketConnection = (
           return next(
             new Error("You are not authorized to connect to the server")
           );
-        (socket as any).decoded = decoded;
+        (socket as any).user = decoded;
         next();
       }
     );
@@ -40,14 +40,14 @@ export const validateEndpoint = (
   next: NextCallback
 ) => {
   jwt.verify(
-    req.headers.authorization.replace("Bearer ", ""),
+    req.headers.authorization.replace("Bearer ", "").trim(),
     process.env.JWT_SECRET,
     (err: any, decoded: any) => {
       if (err)
         return next(
           new Error("You are not authorized to connect to the server")
         );
-      (req as any).decoded = decoded;
+      (req as any).user = decoded;
       next();
     }
   );

@@ -1,12 +1,10 @@
 import { Button, Space, Table } from "antd";
 import Column from "antd/lib/table/Column";
-import React, { useEffect, useState, useRef } from "react";
 import Axios from "axios";
-import { useCookies } from "react-cookie";
+import React, { useEffect, useRef, useState } from "react";
 import io from "socket.io-client";
 let socket: any;
 const FlightsList = () => {
-  const [cookies] = useCookies();
   const [flights, setFlights] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const flightRef = useRef(flights);
@@ -17,7 +15,7 @@ const FlightsList = () => {
         `${process.env.REACT_APP_API_ENDPOINT}/flights`,
         {
           headers: {
-            Authorization: `Bearer ${cookies.token}`,
+            Authorization: `Bearer ${localStorage.token}`,
           },
         }
       );
@@ -31,7 +29,7 @@ const FlightsList = () => {
   const initializeSocket = () => {
     socket = io(`${process.env.REACT_APP_API_ENDPOINT}`, {
       query: {
-        token: cookies.token,
+        token: localStorage.token,
       },
     });
     socket.on("statusUpdated", (newFlighDetails: any) => {

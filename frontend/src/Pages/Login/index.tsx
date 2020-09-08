@@ -1,14 +1,12 @@
-import React, { useState } from "react";
-import LoginForm, { ILoginUser } from "Components/Login/LoginForm";
-import Axios from "axios";
 import { message as Toast } from "antd";
-import { useCookies } from "react-cookie";
+import Axios from "axios";
+import LoginForm, { ILoginUser } from "Components/Login/LoginForm";
+import React, { useState } from "react";
 import { useHistory } from "react-router";
 
 const LoginPage = () => {
-  const [cookies, setCookie] = useCookies(["cookie-name"]);
   const history = useHistory();
-  if (cookies.token) {
+  if (localStorage.token) {
     history.push("/flights");
   }
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -19,7 +17,11 @@ const LoginPage = () => {
         `${process.env.REACT_APP_API_ENDPOINT}/users/login`,
         user
       );
-      setCookie("token", data.token);
+      localStorage.setItem("token", data.token);
+      localStorage.setItem(
+        "expires",
+        `${new Date(new Date().valueOf() + parseInt(data.expires)).valueOf()}`
+      );
       Toast.success("Logged in successfully!");
       history.push("/flights");
     } catch (error) {
