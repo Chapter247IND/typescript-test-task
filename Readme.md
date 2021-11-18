@@ -12,7 +12,7 @@ Created with NodeJS, Fastify, TypeORM, SocketIO with MySQL Databse. Dependencies
 
 ## Demo Video:
 
-[See this Loom](https://www.loom.com/share/4126a4af17fb401582501b1923438c35)
+[See this Loom](https://www.loom.com/share/0fcb98939dbe4fb3b74fcba0e2463ce2)
 
 ## Login Details:
 
